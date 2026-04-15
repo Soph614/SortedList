@@ -47,15 +47,9 @@ public class SortedList {
         int lastIndex;
 
         System.out.println("Begin binary search");
-        System.out.println("Low = " + low);
-        System.out.println("Mid = " + mid);
-        System.out.println("High = " + high);
         do {
             mid = (low + high) / 2;
             System.out.println("Recalculated the mid");
-            System.out.println("Low = " + low);
-            System.out.println("Mid = " + mid);
-            System.out.println("High = " + high);
             if (searchTerm.compareTo(list.get(mid)) == 0) { // searchTerm IS FOUND AT INDEX 4
                 message = "'" + searchTerm + "' found at index " + mid + ":";
                 foundIndex = mid;
@@ -63,43 +57,27 @@ public class SortedList {
                 message += "\n" + String.format("%-6s", foundIndex) + "  " + list.get(foundIndex);
                 message += "\n------------------------------";
                 message += "\n";
-                System.out.println("Low = " + low);
-                System.out.println("Mid = " + mid);
-                System.out.println("High = " + high);
                 break;
             }
             else if (searchTerm.compareTo(list.get(mid)) > 0) { //    returns 1, which means the searchTerm comes AFTER the mid...
                 low = mid + 1;                                  // ...so we  change the low to the index above the mid...
                                                                 // ...so now we'll be searching above the mid
                 System.out.println("Comes after the mid..");
-                System.out.println("Low = " + low);
-                System.out.println("Mid = " + mid);
-                System.out.println("High = " + high);
             }
             else {              //    returns -1, which means the searchTerm comes BEFORE the mid...
                 high = mid - 1; // ...so we change the high to the index below the mid...
                                 // ...so now we'll be searching below the mid
                 System.out.println("Comes before the mid..");
-                System.out.println("Low = " + low);
-                System.out.println("Mid = " + mid);
-                System.out.println("High = " + high);
             }
         }while(low <= high);
 
         if(low > high) {
-            message = "'" + searchTerm + "' not found. Would have\nbeen inserted at index " + low + "\n";
-            System.out.println("Low = " + low);
-            System.out.println("Mid = " + mid);
-            System.out.println("High = " + high);
+            message = "'" + searchTerm + "' not found.\nWould have been at index " + low + "\n";
         }
         return message;
     }
 
     public boolean isEmpty() {
         return list.size() == 0;
-    }
-
-    public void checkForOtherMatchesAroundIndex(String searchTerm) {
-
     }
 }
