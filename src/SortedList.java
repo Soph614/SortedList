@@ -72,7 +72,7 @@ public class SortedList {
         }while(low <= high);
 
         if(low > high) {
-            message = "'" + searchTerm + "' not found.\nWould have been at index " + low + "\n";
+            message = "'" + searchTerm + "' not found.\nWould be at index " + low + "\n";
         }
         return message;
     }
