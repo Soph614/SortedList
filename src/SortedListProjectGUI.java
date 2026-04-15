@@ -66,16 +66,21 @@ public class SortedListProjectGUI extends JFrame {
             list.add(userInput);
                 // after successful adding...
             if (!list.isEmpty()) {
-                searchPnl.setVisible(true);
                 searchTF.setEnabled(true);
             }
         });
 
         // searchTF action listener
         searchTF.addActionListener((ActionEvent ae) -> {
-            searchTerm = searchTF.getText();
-            listDisplayTA.append(list.performBinarySearch(searchTerm) + "\n");
-            searchTF.setText("");
+            if(!searchTF.getText().isEmpty()) { // Only perform the search when there's actually something
+                                                // to search for, to prevent searching for an empty string
+                searchTerm = searchTF.getText();
+                listDisplayTA.append(list.performBinarySearch(searchTerm) + "\n");
+                searchTF.setText("");
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "You can't search for nothing!");
+            }
         });
     }
 
@@ -95,12 +100,13 @@ public class SortedListProjectGUI extends JFrame {
         listDisplayPnl = new JPanel();
 
         Border padding = BorderFactory.createEmptyBorder(15, 15, 15, 15);
-        Border titledBorder = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "YOUR SORTED LIST");
+        Border titledBorder = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "RESULTS");
         listDisplayPnl.setBorder(new CompoundBorder(padding, titledBorder));
 
         listDisplayTA = new JTextArea(7, 33);
         listDisplayTA.setEditable(false);
 
+        listDisplayScrollPane = new JScrollPane();
         listDisplayScrollPane = new JScrollPane(listDisplayTA);
 
         listDisplayPnl.add(listDisplayScrollPane);
@@ -110,7 +116,6 @@ public class SortedListProjectGUI extends JFrame {
         searchPnl = new JPanel();
         searchPnl.setLayout(new BorderLayout());
         searchPnl.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
-        searchPnl.setVisible(false);
 
         searchLbl = new JLabel("Search list:");
         searchTF = new JTextField(30);
